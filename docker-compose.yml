@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  clawsearch-redis:
+    container_name: clawsearch-redis
+    image: redis:alpine
+    command: redis-server --requirepass "${REDIS_PASSWORD}"
+    volumes:
+      - redis-data:/data
+    networks:
+      - clawsearch-network
+    restart: unless-stopped
+
+  clawsearch-searxng:
+    container_name: clawsearch-searxng
+    image: searxng/searxng:latest
+    networks:
+      - clawsearch-network
+    depends_on:
+      - clawsearch-redis
+    volumes:
+      - ./searxng-upstream/searx:/etc/searxng:rw
+    environment:
+      - SEARXNG_SECRET_KEY=${SEARXNG_SECRET_KEY}
+      - SEARXNG_BASE_URL=${SEARXNG_BASE_URL}
+      - REDIS_URL=redis://:${REDIS_PASSWORD}@clawsearch-redis:6379/0
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "1"
+    restart: unless-stopped
+
+networks:
+  clawsearch-network:
+    driver: bridge
+
+volumes:
+  redis-data:
