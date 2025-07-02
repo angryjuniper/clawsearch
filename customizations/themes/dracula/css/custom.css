@@ -762,19 +762,12 @@ input[type="text"]::placeholder {
   font-weight: normal !important;
 }
 
-
-
 /* Hide custom placeholder when input is focused or has content */
 .search_box:focus-within::before,
 .search_box.has-content::before {
   opacity: 0 !important;
   visibility: hidden !important;
 }
-
-
-
-
-
 
 /* ===== FOOTER ===== */
 footer {
@@ -822,49 +815,17 @@ footer p {
   filter: none !important;
 }
 
-/* Absolutely ensure navigation never gets blurred or affected */
-body.footer-blur #links_on_top,
-.footer-blur #links_on_top,
-footer:hover ~ #links_on_top {
-  filter: none !important;
-  transform: translate3d(0, 0, 0) !important;
-  position: fixed !important;
-  z-index: 9999 !important;
-  opacity: 0.9999 !important;
-}
-
-/* Keep navigation completely unaffected by footer interactions */
-.footer-blur #links_on_top {
-  filter: none !important;
-  transform: translate3d(0, 0, 0) !important; /* Keep on GPU layer */
-  position: fixed !important;
-  z-index: 9999 !important;
-  contain: layout style !important;
-  isolation: isolate !important;
-  backface-visibility: hidden !important;
-  perspective: 1000px !important;
-  /* Force into separate compositing layer */
-  opacity: 0.9999 !important; /* Forces composite layer */
-}
-
-/* Prevent footer from affecting navigation positioning */
-footer:hover ~ #links_on_top,
-footer.footer-blur ~ #links_on_top {
-  transform: translate3d(0, 0, 0) !important;
-  position: fixed !important;
-  z-index: 9999 !important;
-}
-
-/* Keep navigation icons completely locked in viewport position */
+/* 🔧 FIXED: Consolidated navigation positioning rules to prevent footer hover conflicts */
+/* Keep navigation icons completely locked in viewport position - SINGLE SOURCE OF TRUTH */
 #links_on_top {
   position: fixed !important;
   top: 2.7rem !important;
   right: 1rem !important;
   z-index: 9999 !important;
   transform: translate3d(0, 0, 0) !important; /* Force GPU layer */
-  transition: none !important;
+  transition: none !important; /* CRITICAL: No transitions that could be triggered by hover */
   will-change: transform !important;
-  contain: layout style !important; /* Avoid strict to keep visibility */
+  contain: layout style !important;
   isolation: isolate !important;
   pointer-events: auto !important;
   margin: 0 !important;
@@ -880,6 +841,23 @@ footer.footer-blur ~ #links_on_top {
   perspective: 1000px !important;
 }
 
+/* 🔧 FIXED: Remove ALL footer hover effects on navigation - prevent any movement */
+body.footer-blur #links_on_top,
+.footer-blur #links_on_top,
+footer:hover ~ #links_on_top,
+footer.footer-blur ~ #links_on_top {
+  /* Override any changes - navigation must NEVER move */
+  position: fixed !important;
+  top: 2.7rem !important;
+  right: 1rem !important;
+  transform: translate3d(0, 0, 0) !important;
+  z-index: 9999 !important;
+  filter: none !important;
+  opacity: 1 !important; /* Ensure visibility */
+  /* No transitions or animations on footer interaction */
+  transition: none !important;
+}
+
 /* Mobile navigation positioning - maximum stability */
 @media screen and (max-width: 50em) {
   #links_on_top {
@@ -891,6 +869,17 @@ footer.footer-blur ~ #links_on_top {
     contain: layout style !important;
     backface-visibility: hidden !important;
     perspective: 1000px !important;
+  }
+  
+  /* 🔧 FIXED: Mobile footer hover rules - prevent movement */
+  body.footer-blur #links_on_top,
+  .footer-blur #links_on_top,
+  footer:hover ~ #links_on_top,
+  footer.footer-blur ~ #links_on_top {
+    top: 1.4rem !important;
+    right: 10px !important;
+    transform: translate3d(0, 0, 0) !important;
+    transition: none !important;
   }
 }
 
@@ -904,6 +893,17 @@ footer.footer-blur ~ #links_on_top {
   contain: layout style !important;
   backface-visibility: hidden !important;
   perspective: 1000px !important;
+}
+
+/* 🔧 FIXED: Homepage footer hover rules - prevent movement */
+#main_index body.footer-blur #links_on_top,
+#main_index .footer-blur #links_on_top,
+#main_index footer:hover ~ #links_on_top,
+#main_index footer.footer-blur ~ #links_on_top {
+  top: 0.5rem !important;
+  right: 0.5rem !important;
+  transform: translate3d(0, 0, 0) !important;
+  transition: none !important;
 }
 
 /* Desktop footer - keep all links visible */
