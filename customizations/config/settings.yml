@@ -1,0 +1,71 @@
+use_default_settings: true
+
+general:
+  instance_name: "ClawSearch"
+  debug: false
+  enable_metrics: false
+
+search:
+  safe_search: 0
+  autocomplete: "duckduckgo"
+  autocomplete_min_chars: 3
+  default_lang: "en"
+
+server:
+  port: 8080
+  bind_address: "0.0.0.0"
+  secret_key: "${SEARXNG_SECRET}"
+  base_url: "${SEARXNG_BASE_URL}"
+  image_proxy: true
+
+redis:
+  url: redis://redis:6379/0
+
+ui:
+  static_use_hash: false
+  default_locale: "en"
+  query_in_title: true
+  infinite_scroll: true
+  center_alignment: true
+  results_on_new_tab: true
+  default_theme: dracula
+  theme_args:
+    simple_style: dark
+
+outgoing:
+  request_timeout: 3.0
+  max_request_timeout: 10.0
+  pool_connections: 100
+  pool_maxsize: 20
+  enable_http2: true
+
+engines:
+  - name: startpage
+    engine: startpage
+    shortcut: sp
+    weight: 3
+    disabled: false
+
+  - name: brave
+    engine: brave
+    shortcut: br
+    weight: 2
+    disabled: false
+
+  - name: duckduckgo
+    engine: duckduckgo
+    shortcut: ddg
+    weight: 1
+    disabled: false
+
+  - name: wikipedia
+    engine: wikipedia
+    shortcut: wp
+    weight: 1
+    disabled: false
+
+  - name: qwant
+    engine: qwant
+    shortcut: qw
+    weight: 2
+    disabled: false

@@ -1,0 +1,14 @@
+{% extends "dracula/base.html" %}
+{% from 'dracula/icons.html' import icon_big %}
+{% block content %}
+<div class="index">
+    <div class="title" style="text-indent: -9999px; overflow: hidden; position: relative;">
+        <h1 style="display: none;">SearXNG</h1>
+        <img src="{{ url_for('static', filename='themes/dracula/img/searxng.svg') }}" 
+             alt="" 
+             class="searxng-logo"
+             style="max-width: 600px; width: 100%; height: auto; max-height: 200px; display: block; margin: 0 auto; position: relative; z-index: 10;">
+    </div>
+    {% include 'dracula/simple_search.html' %}
+</div>
+{% endblock %}

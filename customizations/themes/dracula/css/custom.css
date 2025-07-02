@@ -1,0 +1,1084 @@
+/* ===== Universal Box Sizing (BEST PRACTICE) ===== */
+/* Apply a more intuitive box model to all elements. This is the core fix
+   that allows the autocomplete box to be sized correctly. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Custom logo styling */
+.title img.logo {
+  max-height: 100px;
+  width: auto;
+}
+
+#search_logo img.logo {
+  max-height: 50px;
+  width: auto;
+}
+
+/* CRITICAL FIX: Override the base SearXNG CSS PNG background rule */
+.index .title {
+  background: none !important;
+  background-image: none !important;
+}
+
+/* Font declarations */
+@font-face {
+  font-family: 'Hack Nerd Font';
+  src: url('../fonts/HackNerdFont-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Hack Nerd Font';
+  src: url('../fonts/HackNerdFont-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Hack Nerd Font';
+  src: url('../fonts/HackNerdFont-Italic.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Hack Nerd Font';
+  src: url('../fonts/HackNerdFont-BoldItalic.woff') format('woff');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Dracula theme colors - apply to all contexts */
+:root,
+:root.theme-dark,
+:root.theme-auto {
+  /* Font */
+  --color-base-font-family: 'Hack Nerd Font', system-ui, -apple-system, monospace;
+
+  /* Base colors */
+  --color-base-font: #f8f8f2;
+  --color-base-font-rgb: 248, 248, 242;
+  --color-base-background: #282a36;
+  --color-base-background-mobile: #282a36;
+  --color-base-background-selected: #44475a;
+  --color-base-background-hover: #44475a;
+  --color-base-background-dark: #21222c;
+  --color-base-background-light: #6272a4;
+
+  /* URL colors */
+  --color-url-font: #bd93f9;
+  --color-url-visited-font: #ff79c6;
+  --color-url-hover: #ff79c6; /* Added for consistency */
+
+  /* Header and Footer */
+  --color-header-background: #21222c;
+  --color-header-border: #44475a;
+  --color-footer-background: #21222c;
+  --color-footer-border: #44475a;
+
+  /* Sidebar */
+  --color-sidebar-border: #44475a;
+  --color-sidebar-font: #f8f8f2;
+  --color-sidebar-background: #282a36;
+
+  /* Back to top button */
+  --color-backtotop-font: #f8f8f2;
+  --color-backtotop-border: #44475a;
+  --color-backtotop-background: #282a36;
+
+  /* Buttons */
+  --color-btn-background: #bd93f9;
+  --color-btn-font: #282a36;
+  --color-btn-background-hover: #ff79c6; /* Added for consistency */
+  --color-btn-font-hover: #282a36; /* Added for consistency */
+  --color-show-btn-background: #6272a4;
+  --color-show-btn-font: #f8f8f2;
+
+  /* Search */
+  --color-search-border: #6272a4;
+  --color-search-shadow: 0 2px 8px rgba(40, 42, 54, 0.25);
+  --color-search-background: #282a36;
+  --color-search-font: #f8f8f2;
+  --color-search-background-hover: #bd93f9;
+  --color-search-border-hover: #ff79c6; /* Added for consistency */
+
+  /* Status colors */
+  --color-error: #ff5555;
+  --color-error-background: #44475a;
+  --color-warning: #f1fa8c;
+  --color-warning-background: #44475a;
+  --color-success: #50fa7b;
+  --color-success-background: #44475a;
+
+  /* Categories */
+  --color-categories-item-selected-font: #ff79c6;
+  --color-categories-item-border-selected: #ff79c6;
+
+  /* Autocomplete */
+  --color-autocomplete-font: #f8f8f2;
+  --color-autocomplete-border: #6272a4;
+  --color-autocomplete-shadow: 0 2px 8px rgba(40, 42, 54, 0.25);
+  --color-autocomplete-background: #282a36;
+  --color-autocomplete-background-hover: #44475a;
+
+  /* Results */
+  --color-result-background: #282a36;
+  --color-result-border: #44475a;
+  --color-result-url-font: #50fa7b;
+  --color-result-vim-selected: #44475acc;
+  --color-result-vim-arrow: #bd93f9;
+  --color-result-description-highlight-font: #f1fa8c;
+  --color-result-link-font: #bd93f9;
+  --color-result-link-font-highlight: #ff79c6;
+  --color-result-link-visited-font: #ff79c6;
+  --color-result-publishdate-font: #6272a4;
+  --color-result-engines-font: #6272a4;
+  --color-result-search-url-border: #44475a;
+  --color-result-search-url-font: #f8f8f2;
+
+  /* Result details */
+  --color-result-detail-font: #f8f8f2;
+  --color-result-detail-label-font: #6272a4;
+  --color-result-detail-background: #21222c;
+  --color-result-detail-hr: #44475a;
+  --color-result-detail-link: #bd93f9;
+  --color-result-detail-loader-border: rgba(248, 248, 242, 0.2);
+  --color-result-detail-loader-borderleft: rgba(40, 42, 54, 0);
+
+  /* Settings */
+  --color-settings-tr-hover: #44475a;
+  --color-settings-engine-description-font: #6272a4;
+  --color-settings-table-group-background: #21222c;
+
+  /* Toolkit */
+  --color-toolkit-badge-font: #f8f8f2;
+  --color-toolkit-badge-background: #6272a4;
+  --color-toolkit-kbd-font: #282a36;
+  --color-toolkit-kbd-background: #f8f8f2;
+  --color-toolkit-dialog-border: #44475a;
+  --color-toolkit-dialog-background: #21222c;
+  --color-toolkit-tabs-label-border: #282a36;
+  --color-toolkit-tabs-section-border: #44475a;
+  --color-toolkit-select-background: #282a36;
+  --color-toolkit-select-border: #44475a;
+  --color-toolkit-select-background-hover: #44475a;
+  --color-toolkit-input-text-font: #f8f8f2;
+  --color-toolkit-checkbox-onoff-off-background: #282a36;
+  --color-toolkit-checkbox-onoff-on-background: #282a36;
+  --color-toolkit-checkbox-onoff-on-mark-background: #bd93f9;
+  --color-toolkit-checkbox-onoff-on-mark-color: #282a36;
+  --color-toolkit-checkbox-onoff-off-mark-background: #6272a4;
+  --color-toolkit-checkbox-onoff-off-mark-color: #282a36;
+  --color-toolkit-checkbox-label-background: #282a36;
+  --color-toolkit-checkbox-label-border: #44475a;
+  --color-toolkit-checkbox-input-border: #bd93f9;
+  --color-toolkit-engine-tooltip-border: #44475a;
+  --color-toolkit-engine-tooltip-background: #282a36;
+  --color-toolkit-loader-border: rgba(248, 248, 242, 0.2);
+  --color-toolkit-loader-borderleft: rgba(40, 42, 54, 0);
+
+  /* Documentation */
+  --color-doc-code: #f8f8f2;
+  --color-doc-code-background: #44475a;
+
+  /* Favicon */
+  --color-favicon-background-color: #f8f8f2;
+  --color-favicon-border-color: #6272a4;
+}
+
+/* Apply custom font to elements */
+body {
+  font-family: var(--color-base-font-family) !important;
+  background-color: var(--color-base-background);
+  color: var(--color-base-font);
+  /* Add padding for fixed footer */
+  padding-bottom: 25px !important;
+}
+
+a {
+  color: var(--color-url-font);
+}
+
+a:hover {
+  color: var(--color-url-hover);
+}
+
+a:visited {
+  color: var(--color-url-visited-font);
+}
+
+/* Comprehensive hiding of SearXNG text behind logo */
+.title h1,
+.title .title-text,
+.title::before,
+.title::after {
+  display: none !important;
+  visibility: hidden !important;
+  position: absolute !important;
+  left: -9999px !important;
+  z-index: -1 !important;
+}
+
+/* Hide any text content in the title div */
+.index .title {
+  font-size: 0 !important;
+  line-height: 0 !important;
+  color: transparent !important;
+  text-shadow: none !important;
+  overflow: hidden !important;
+}
+
+/* Completely hide all text nodes in title */
+.index .title * {
+  color: transparent !important;
+  text-indent: -9999px !important;
+  font-size: 0 !important;
+}
+
+/* ===== IMPROVED GOOGLE-STYLE HOMEPAGE LAYOUT ===== */
+/* CSS Custom Properties for proportional scaling */
+:root {
+  --homepage-container-width: min(90vw, 700px);
+  --search-to-logo-ratio: 0.95; /* Search box is 95% of logo width - slightly smaller */
+  --vertical-offset: clamp(-38vh, -34vh, -30vh); /* Ultra-smooth vertical positioning */
+  --element-gap: clamp(25px, 4vh, 40px); /* Proportional gap between logo and search */
+}
+
+/* Portrait/Mobile orientation - adjusted spacing and ratios */
+@media screen and (orientation: portrait), 
+       screen and (max-aspect-ratio: 1/1) {
+  :root {
+    --search-to-logo-ratio: 0.9; /* Search box smaller relative to mobile logo */
+    --vertical-offset: clamp(-36vh, -32vh, -28vh); /* Ultra-smooth positioning for portrait */
+    --element-gap: clamp(20px, 3.5vh, 35px); /* Tighter spacing for portrait */
+  }
+}
+
+/* Very narrow screens (phone portrait) - optimize further */
+@media screen and (max-width: 480px) and (orientation: portrait) {
+  :root {
+    --search-to-logo-ratio: 0.85; /* Even smaller search box on tiny screens */
+    --vertical-offset: clamp(-34vh, -30vh, -26vh); /* Consistent smooth scaling */
+    --element-gap: clamp(15px, 3vh, 25px);
+  }
+}
+
+/* Main container for homepage - perfect flexbox centering with proportional positioning */
+.index {
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0 clamp(15px, 3vw, 30px) !important;
+    box-sizing: border-box !important;
+    /* Flexible positioning that adapts to screen size */
+    transform: translateY(var(--vertical-offset)) !important;
+    /* Perfect horizontal centering */
+    text-align: center !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    margin: 0 auto !important;
+    /* Allow logo scaling to extend beyond container bounds */
+    overflow: visible !important;
+    /* Add consistent gap between logo and search */
+    gap: var(--element-gap) !important;
+}
+
+/* Logo container - perfect flexbox centering with tight hover area */
+.index .title {
+    text-align: center !important;
+    width: fit-content !important; /* Only as wide as the logo content */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-direction: column !important;
+    /* Ensure scaled logo doesn't get clipped */
+    overflow: visible !important;
+    padding: 0 !important; /* No padding to keep hover area tight */
+    margin: 0 !important; /* Let flexbox gap handle spacing */
+}
+
+/* Logo image - perfectly centered with proportional scaling and tight bounds */
+.searxng-logo {
+    /* Logo width is the primary size reference */
+    width: var(--homepage-container-width) !important;
+    height: auto !important;
+    max-width: 90vw !important; /* Slightly smaller to allow scaling room */
+    display: block !important;
+    margin: 0 auto !important;
+    
+    /* Visual enhancements */
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)) !important;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), filter 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transform-origin: center !important; /* Ensure scaling from center */
+    /* Ensure scaling doesn't get clipped and tight hover bounds */
+    position: relative !important;
+    z-index: 5 !important;
+    /* Tighter hover area by removing any extra space */
+    object-fit: contain !important;
+    object-position: center !important;
+}
+
+.searxng-logo:hover {
+    transform: scale(1.05) !important; /* Slightly larger scale for more presence */
+    filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.5)) drop-shadow(0 4px 8px rgba(98, 114, 164, 0.2)) !important; /* Enhanced shadow with subtle purple tint */
+    z-index: 10 !important; /* Ensure logo stays above blurred content */
+}
+
+/* Sophisticated page blur effect when logo is hovered */
+.searxng-logo:hover ~ * {
+    filter: blur(2px) !important;
+    transition: filter 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Apply blur when hovering over the tight logo container */
+.index .title:hover ~ #search {
+    filter: blur(2px) !important;
+    transition: filter 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Ensure logo container itself doesn't get blurred */
+.index .title:hover {
+    filter: none !important;
+}
+
+/* General page blur effect - target main content when logo is hovered */
+.index:has(.searxng-logo:hover) #search,
+.index:has(.searxng-logo:hover) footer {
+    filter: blur(2px) !important;
+    transition: filter 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Reset blur when not hovering */
+#search,
+footer {
+    filter: none !important;
+    transition: filter 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Flexbox gap handles spacing automatically */
+
+/* Switch logo source to match navigation text visibility breakpoints */
+@media screen and (width <= calc(79.75em - .5px)) {
+    .searxng-logo {
+        content: url('/static/themes/dracula/img/searxng-mobile.svg') !important;
+        /* Ensure mobile logo also has tight bounds */
+        max-width: 85vw !important;
+        width: auto !important;
+        height: auto !important;
+    }
+    
+    /* Ensure mobile logo container is also tightly bounded */
+    .index .title {
+        width: fit-content !important;
+        max-width: 90vw !important;
+    }
+}
+
+/* Ensure desktop logo for larger screens when navigation text is visible */
+@media screen and (width > calc(79.75em - .5px)) {
+    .searxng-logo {
+        content: url('/static/themes/dracula/img/searxng.svg') !important;
+    }
+}
+
+/* Search container - perfectly centered and proportional to logo */
+#search {
+    width: 100% !important;
+    max-width: calc(var(--homepage-container-width) * var(--search-to-logo-ratio)) !important;
+    margin: 0 auto !important;
+    /* Ensure perfect horizontal centering */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+}
+
+#search_header {
+    width: 100% !important;
+    max-width: calc(var(--homepage-container-width) * var(--search-to-logo-ratio)) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: var(--element-gap) !important;
+    margin: 0 auto !important;
+}
+
+#search_view {
+    width: 100% !important;
+    max-width: calc(var(--homepage-container-width) * var(--search-to-logo-ratio)) !important;
+    position: relative !important;
+    margin: 0 auto !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+/* Search box - perfectly centered and scales relative to logo */
+.search_box {
+    background: rgba(12, 13, 22, 0.99) !important; /* Even darker, almost opaque background */
+    border: 2px solid rgba(255, 255, 255, 0.75) !important; /* Slightly transparent white border */
+    border-radius: 8px !important;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important; /* Snappier animations */
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    max-width: calc(var(--homepage-container-width) * var(--search-to-logo-ratio)) !important;
+    min-height: clamp(44px, 6vh, 56px) !important; /* Proportional height */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+    margin: 0 auto !important;
+}
+
+/* Focus state - apply glow and shadow with snappy animation */
+.search_box:focus-within {
+  border-color: #6272a4 !important;
+  box-shadow: 0 0 0 3px rgba(98, 114, 164, 0.3), 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* ===== CORRECTED AUTOCOMPLETE LAYOUT ===== */
+/* This is the corrected rule. It now uses `left: 0` and `right: 0`
+   to stretch the box to the full width of its parent (.search_box).
+   The universal `box-sizing: border-box` rule ensures that the border
+   is calculated *inside* this width, not added to the outside.
+   The incorrect `width`, `right`, and `box-sizing` properties have been removed. */
+.search_box .autocomplete {
+  position: absolute !important;
+  top: 100% !important;
+  left: -2px !important; /* align to outer border */
+  right: -2px !important; /* extend to cover full width including buttons */
+  width: 100% !important; /* let left/right offsets define the exact width */
+  background: rgba(33, 34, 44, 0.9) !important; /* More transparent for better blur effect */
+  backdrop-filter: blur(20px) !important; /* Increased blur for sophistication */
+  border: 2px solid #6272a4 !important;
+  border-radius: 8px !important;
+  margin-top: 4px !important;
+  /* Matching search box focus state with secondary outline/shadow */
+  box-shadow: 0 0 0 3px rgba(98, 114, 164, 0.3), 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+  z-index: 1000 !important;
+  box-sizing: content-box !important;
+  /* Default hidden state with enhanced blur/fade */
+  display: none !important;
+  opacity: 0 !important;
+  transform: translateY(-12px) scale(0.95) !important; /* Scale and translate for smoother entrance */
+  filter: blur(2px) !important; /* Initial blur for smooth fade-in */
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1), 
+              transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), 
+              filter 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important; /* Normal show animations */
+  /* ensure autocomplete never reaches footer */
+  max-height: 45vh !important; /* ensure autocomplete never reaches footer */
+  overflow-y: auto;
+  overflow-x: hidden; /* prevent horizontal scrollbar */
+  display: flex !important; /* allow flex layout */
+  flex-direction: column !important;
+  align-items: stretch !important;
+  /* Perfect horizontal centering relative to search box */
+  text-align: left !important; /* Text should be left-aligned within autocomplete */
+  /* Improved handling for dynamic content from multiple backends */
+  min-width: 100% !important; /* ensure minimum width matches search box */
+  /* Ensure dropdown stays centered and matches search box width */
+  max-width: calc(var(--homepage-container-width) * var(--search-to-logo-ratio) + 4px) !important; /* Match search box width + borders */
+}
+
+/* Show autocomplete when it has the 'open' class - smooth entrance */
+.search_box .autocomplete.open {
+  display: block !important;
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important; /* Smooth scale and position */
+  filter: blur(0px) !important; /* Remove blur for sharp focus */
+  visibility: visible !important;
+}
+
+/* Ultra-fast hide animation when autocomplete is closing */
+.search_box .autocomplete:not(.open) {
+  /* Ultra-fast hide - nearly instantaneous to eliminate any flash */
+  transition: all 0.001s ease !important;
+  /* Hide everything immediately */
+  border-color: transparent !important;
+  box-shadow: none !important;
+  filter: blur(6px) !important;
+  opacity: 0 !important;
+  transform: translateY(-8px) scale(0.9) !important;
+  visibility: hidden !important;
+  display: none !important;
+}
+
+/* Handle empty autocomplete state gracefully */
+.autocomplete:empty {
+  display: none !important;
+}
+
+/* Ensure autocomplete list handles dynamic content properly */
+.autocomplete ul {
+  list-style: none !important;
+  padding: 8px 0 !important;
+  margin: 0 !important;
+  max-height: none !important; /* Remove inner max-height since container handles it */
+  overflow-y: visible !important;
+  width: 100% !important;
+  overflow-x: hidden !important; /* no horizontal scroll */
+  /* Better support for varying content from different backends */
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1px !important; /* small gap between items for better readability */
+}
+
+/* Custom scrollbar styling for autocomplete */
+.autocomplete::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+.autocomplete::-webkit-scrollbar-track {
+  background: rgba(68, 71, 90, 0.3) !important;
+  border-radius: 4px !important;
+}
+
+.autocomplete::-webkit-scrollbar-thumb {
+  background: rgba(98, 114, 164, 0.6) !important;
+  border-radius: 4px !important;
+  transition: background 0.3s ease !important;
+}
+
+.autocomplete::-webkit-scrollbar-thumb:hover {
+  background: rgba(98, 114, 164, 0.8) !important;
+}
+
+/* Firefox scrollbar */
+.autocomplete {
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(98, 114, 164, 0.6) rgba(68, 71, 90, 0.3) !important;
+}
+
+/* Autocomplete items - improved for dynamic content from multiple backends */
+.autocomplete li {
+  padding: clamp(10px, 2vw, 14px) clamp(16px, 3vw, 20px) !important;
+  color: #f8f8f2 !important;
+  cursor: pointer !important;
+  border-bottom: 1px solid rgba(98, 114, 164, 0.2) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  font-size: clamp(14px, 2.5vw, 16px) !important;
+  /* Better handling for varying suggestion lengths from different backends */
+  white-space: nowrap !important; /* no line wrap */
+  overflow: hidden !important; /* hide overflow */
+  text-overflow: ellipsis !important; /* show ellipsis for long suggestions */
+  min-height: 20px !important; /* ensure consistent height */
+  word-break: break-word !important; /* handle very long words gracefully */
+  /* Ensure suggestions from different engines display consistently */
+  line-height: 1.4 !important;
+  vertical-align: middle !important;
+}
+
+.autocomplete li:last-child {
+  border-bottom: none !important;
+}
+
+/* Hover and selection states with gradient */
+.autocomplete li:hover,
+.autocomplete li.selected,
+.autocomplete li.active {
+  background: linear-gradient(135deg,
+      rgba(98, 114, 164, 0.25) 0%,
+      rgba(98, 114, 164, 0.15) 40%,
+      rgba(98, 114, 164, 0.08) 70%,
+      rgba(98, 114, 164, 0.05) 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 12px rgba(98, 114, 164, 0.2) !important;
+  transform: translateX(2px) !important;
+}
+
+/* Feathered glow effect on hover/selection */
+.autocomplete li:hover::before,
+.autocomplete li.selected::before,
+.autocomplete li.active::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: radial-gradient(ellipse 120% 80% at 20% 50%,
+      rgba(98, 114, 164, 0.12) 0%,
+      rgba(98, 114, 164, 0.06) 40%,
+      rgba(98, 114, 164, 0.03) 70%,
+      transparent 100%) !important;
+  border-radius: 4px !important;
+  pointer-events: none !important;
+  opacity: 1 !important;
+  transition: opacity 0.3s ease !important;
+}
+
+/* Input styling - perfectly centered within search box */
+input#q,
+input[type="search"],
+input[type="text"] {
+  background: transparent !important;
+  color: #ffffff !important;
+  border: none !important;
+  outline: none !important;
+  padding: clamp(12px, 2.5vw, 16px) clamp(16px, 3vw, 20px) !important;
+  font-size: clamp(14px, 2.5vw, 16px) !important;
+  flex: 1 !important;
+  margin: 0 !important;
+  font-family: 'Hack Nerd Font', system-ui, monospace !important;
+  box-shadow: none !important;
+  text-align: left !important; /* Keep text left-aligned for usability */
+  width: 100% !important;
+}
+
+/* Hide default placeholder for custom animated one */
+input#q::placeholder,
+input[type="search"]::placeholder,
+input[type="text"]::placeholder {
+  color: transparent !important;
+  opacity: 0 !important;
+}
+
+/* Style buttons inside the search box - sophisticated color states */
+.search_box button {
+  background: transparent !important;
+  border: none !important;
+  color: #ffffff !important; /* White when search box is out of focus */
+  padding: clamp(6px, 1.5vw, 10px) clamp(8px, 2vw, 12px) !important;
+  cursor: pointer !important;
+  border-radius: 4px !important;
+  transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important; /* Snappier button animations */
+  font-size: clamp(16px, 3vw, 20px) !important;
+}
+
+/* Buttons turn purple when search box is focused */
+.search_box:focus-within button {
+  color: #6272a4 !important; /* Purple matching the focus border */
+}
+
+/* Buttons turn purple on hover when search box is out of focus */
+.search_box button:hover {
+  color: #6272a4 !important;
+  background: transparent !important;
+}
+
+/* Buttons turn white on hover when search box is focused */
+.search_box:focus-within button:hover {
+  color: #ffffff !important;
+  background: transparent !important;
+}
+
+/* Results page layout fixes - perfect centering */
+.results #search {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 15px !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding: 0 clamp(15px, 3vw, 30px) !important;
+}
+
+/* Add logo to results page */
+.results #search::before {
+  content: "" !important;
+  background-image: url('/static/themes/dracula/img/favicon.svg') !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  flex-shrink: 0 !important;
+}
+
+.results #search_header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  max-width: 1200px !important;
+  gap: 20px !important;
+  margin: 0 auto !important;
+}
+
+.results #search_view {
+  flex: 1 !important;
+  max-width: 600px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 0 auto !important;
+}
+
+/* Fix categories layout on results page */
+.results #categories {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  align-items: center !important;
+  margin-left: auto !important;
+}
+
+.results #categories label {
+  display: inline-flex !important;
+  align-items: center !important;
+  white-space: nowrap !important;
+  margin: 0 !important;
+  padding: 4px 8px !important;
+  border-radius: 4px !important;
+  transition: background-color 0.2s ease !important;
+}
+
+.results #categories label:hover {
+  background-color: rgba(98, 114, 164, 0.1) !important;
+}
+
+/* Custom placeholder */
+.search_box::before {
+  content: "Explore the cyber cat-alogue..." !important;
+  position: absolute !important;
+  left: 16px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: rgba(136, 146, 176, 0.8) !important;
+  font-style: italic !important;
+  pointer-events: none !important;
+  font-size: inherit !important;
+  font-family: inherit !important;
+  opacity: 1 !important;
+  transition: opacity 0.3s ease !important;
+  z-index: 2 !important;
+  line-height: 1 !important;
+  font-weight: normal !important;
+}
+
+
+
+/* Hide custom placeholder when input is focused or has content */
+.search_box:focus-within::before,
+.search_box.has-content::before {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+
+
+
+
+
+/* ===== FOOTER ===== */
+footer {
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+  font-size: 0.7rem !important;
+  line-height: 1 !important;
+  border-top: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  /* Always keep footer visible */
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  background: rgba(24, 25, 38, 0.98) !important; /* Much darker than page background */
+  backdrop-filter: blur(15px) !important;
+  z-index: 100 !important;
+  cursor: pointer !important; /* Indicate it's clickable on mobile */
+}
+
+footer p {
+  margin: 0 !important;
+}
+
+/* Keep footer links functional - just hide | characters and replace with • via JS */
+footer p {
+  font-size: 0.7rem !important;
+}
+
+/* Footer hover blur effect - blur main content and footer text, but keep popup sharp */
+.footer-blur main {
+  filter: blur(2px) !important;
+  transition: filter 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.footer-blur footer {
+  filter: blur(2px) !important;
+  transition: filter 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.footer-blur .footer-popup {
+  filter: none !important;
+}
+
+/* Absolutely ensure navigation never gets blurred or affected */
+body.footer-blur #links_on_top,
+.footer-blur #links_on_top,
+footer:hover ~ #links_on_top {
+  filter: none !important;
+  transform: translate3d(0, 0, 0) !important;
+  position: fixed !important;
+  z-index: 9999 !important;
+  opacity: 0.9999 !important;
+}
+
+/* Keep navigation completely unaffected by footer interactions */
+.footer-blur #links_on_top {
+  filter: none !important;
+  transform: translate3d(0, 0, 0) !important; /* Keep on GPU layer */
+  position: fixed !important;
+  z-index: 9999 !important;
+  contain: layout style !important;
+  isolation: isolate !important;
+  backface-visibility: hidden !important;
+  perspective: 1000px !important;
+  /* Force into separate compositing layer */
+  opacity: 0.9999 !important; /* Forces composite layer */
+}
+
+/* Prevent footer from affecting navigation positioning */
+footer:hover ~ #links_on_top,
+footer.footer-blur ~ #links_on_top {
+  transform: translate3d(0, 0, 0) !important;
+  position: fixed !important;
+  z-index: 9999 !important;
+}
+
+/* Keep navigation icons completely locked in viewport position */
+#links_on_top {
+  position: fixed !important;
+  top: 2.7rem !important;
+  right: 1rem !important;
+  z-index: 9999 !important;
+  transform: translate3d(0, 0, 0) !important; /* Force GPU layer */
+  transition: none !important;
+  will-change: transform !important;
+  contain: layout style !important; /* Avoid strict to keep visibility */
+  isolation: isolate !important;
+  pointer-events: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  min-width: auto !important;
+  min-height: auto !important;
+  max-width: none !important;
+  max-height: none !important;
+  /* Additional stability properties */
+  backface-visibility: hidden !important;
+  perspective: 1000px !important;
+}
+
+/* Mobile navigation positioning - maximum stability */
+@media screen and (max-width: 50em) {
+  #links_on_top {
+    top: 1.4rem !important;
+    right: 10px !important;
+    position: fixed !important;
+    z-index: 9999 !important;
+    transform: translate3d(0, 0, 0) !important;
+    contain: layout style !important;
+    backface-visibility: hidden !important;
+    perspective: 1000px !important;
+  }
+}
+
+/* Homepage navigation positioning - maximum stability */
+#main_index #links_on_top {
+  top: 0.5rem !important;
+  right: 0.5rem !important;
+  position: fixed !important;
+  z-index: 9999 !important;
+  transform: translate3d(0, 0, 0) !important;
+  contain: layout style !important;
+  backface-visibility: hidden !important;
+  perspective: 1000px !important;
+}
+
+/* Desktop footer - keep all links visible */
+@media screen and (min-width: 768px) and (orientation: landscape) {
+  footer p {
+    display: block !important;
+  }
+}
+
+/* Mobile/Portrait footer - show simplified text */
+@media screen and (max-width: 767px), screen and (orientation: portrait) {
+  footer p {
+    font-size: 0 !important; /* Hide original text */
+  }
+  
+  footer p::after {
+    content: "💡 Powered by SearXNG" !important;
+    font-size: 0.7rem !important;
+    display: inline !important;
+  }
+}
+
+/* Footer popup for mobile view only */
+@media screen and (max-width: 767px), screen and (orientation: portrait) {
+  .footer-popup {
+    position: fixed !important;
+    bottom: 30px !important;
+    left: 50% !important;
+    transform: translateX(-50%) translateY(20px) !important;
+    background: rgba(12, 13, 22, 0.98) !important;
+    border: 2px solid rgba(98, 114, 164, 0.8) !important;
+    border-radius: 12px !important;
+    padding: 16px 20px !important;
+    font-size: 0.7rem !important;
+    color: #f8f8f2 !important;
+    backdrop-filter: blur(20px) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
+    z-index: 1000 !important;
+    max-width: 90vw !important;
+    text-align: center !important;
+    display: none !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s ease, transform 0.3s ease !important;
+  }
+
+  .footer-popup.show {
+    display: block !important;
+    opacity: 1 !important;
+    transform: translateX(-50%) translateY(0) !important;
+  }
+
+  .footer-popup a {
+    color: #ff79c6 !important; /* Same pink as regular footer links */
+    text-decoration: none !important;
+  }
+
+  .footer-popup a:hover {
+    color: #ffffff !important;
+    text-decoration: underline !important;
+  }
+}
+
+/* ===== IMPROVED RESPONSIVE DESIGN ===== */
+/* Large screens - optimal proportions (landscape) */
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  :root {
+    --homepage-container-width: min(85vw, 700px);
+    --search-to-logo-ratio: 0.95; /* Search box slightly smaller than logo */
+    --vertical-offset: clamp(-38vh, -35vh, -32vh); /* Ultra-smooth responsive positioning */
+    --element-gap: clamp(35px, 5vh, 45px);
+  }
+}
+
+/* Large screens - portrait orientation */
+@media screen and (min-width: 1200px) and (orientation: portrait) {
+  :root {
+    --homepage-container-width: min(90vw, 600px);
+    --search-to-logo-ratio: 0.9; /* Search box smaller than logo */
+    --vertical-offset: clamp(-36vh, -32vh, -28vh); /* Smooth portrait scaling */
+    --element-gap: clamp(25px, 4vh, 35px);
+  }
+}
+
+/* Medium screens - laptop/tablet landscape */
+@media screen and (min-width: 768px) and (max-width: 1199px) and (orientation: landscape) {
+  :root {
+    --homepage-container-width: min(88vw, 600px);
+    --search-to-logo-ratio: 0.92; /* Consistent proportions */
+    --vertical-offset: clamp(-37vh, -34vh, -31vh); /* Ultra-smooth transitions */
+    --element-gap: clamp(30px, 4.5vh, 40px);
+  }
+}
+
+/* Medium screens - tablet portrait */
+@media screen and (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  :root {
+    --homepage-container-width: min(85vw, 500px);
+    --search-to-logo-ratio: 0.88; /* Search box smaller for tablets */
+    --vertical-offset: clamp(-36vh, -33vh, -30vh); /* Smooth portrait positioning */
+    --element-gap: clamp(25px, 4vh, 35px);
+  }
+}
+
+/* Small screens - tablet portrait and small laptops */
+@media screen and (max-width: 767px) {
+  :root {
+    --homepage-container-width: min(92vw, 500px);
+    --search-to-logo-ratio: 0.9; /* Maintain proportional relationship */
+    --vertical-offset: clamp(-36vh, -33vh, -30vh); /* Consistent smooth positioning */
+    --element-gap: clamp(25px, 4vh, 35px);
+  }
+}
+
+/* Mobile screens - phone landscape */
+@media screen and (max-width: 480px) and (orientation: landscape) {
+  :root {
+    --homepage-container-width: min(85vw, 400px);
+    --search-to-logo-ratio: 0.88; /* Smaller search box for mobile landscape */
+    --vertical-offset: clamp(-30vh, -26vh, -22vh); /* Smooth landscape positioning */
+    --element-gap: clamp(15px, 3vh, 25px);
+  }
+}
+
+/* Mobile screens - phone portrait (general) */
+@media screen and (max-width: 480px) and (orientation: portrait) {
+  :root {
+    --homepage-container-width: min(95vw, 400px);
+    --search-to-logo-ratio: 0.88; /* Search box smaller than logo */
+    --vertical-offset: clamp(-33vh, -29vh, -25vh); /* Smooth portrait positioning */
+    --element-gap: clamp(18px, 3.5vh, 28px);
+  }
+}
+
+/* Very small screens - small phones portrait */
+@media screen and (max-width: 320px) and (orientation: portrait) {
+  :root {
+    --homepage-container-width: 98vw;
+    --search-to-logo-ratio: 0.85; /* Keep proportional relationship */
+    --vertical-offset: clamp(-32vh, -28vh, -24vh); /* Consistent smooth scaling */
+    --element-gap: clamp(12px, 2.5vh, 20px);
+  }
+}
+
+/* Ultra-wide screens - landscape only */
+@media screen and (min-width: 1600px) and (orientation: landscape) {
+  :root {
+    --homepage-container-width: min(75vw, 800px); /* Slightly larger for ultra-wide */
+    --search-to-logo-ratio: 0.98; /* Search box almost same size as logo on ultra-wide */
+    --vertical-offset: clamp(-40vh, -37vh, -34vh); /* Smooth ultra-wide positioning */
+    --element-gap: clamp(40px, 5.5vh, 50px);
+  }
+}
+
+/* Short screens - maintain proportions regardless of orientation */
+@media screen and (max-height: 600px) {
+  :root {
+    --vertical-offset: clamp(-24vh, -20vh, -16vh); /* Ultra-smooth positioning for short screens */
+    --element-gap: clamp(10px, 2vh, 20px);
+  }
+  
+  .index {
+    min-height: 90vh !important;
+  }
+}
+
+/* High DPI displays - improve image rendering */
+@media screen and (-webkit-min-device-pixel-ratio: 2), 
+       screen and (min-resolution: 192dpi) {
+  .searxng-logo {
+    image-rendering: -webkit-optimize-contrast !important;
+    image-rendering: crisp-edges !important;
+  }
+}
+
+/* Performance optimization for animations */
+.search_box:focus-within .autocomplete {
+  will-change: transform, opacity;
+}

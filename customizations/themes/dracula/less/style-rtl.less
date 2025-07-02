@@ -1,0 +1,27 @@
+@import "style.less";
+
+// RTL-specific styles
+html[dir="rtl"] {
+    // Flip margins and paddings
+    body {
+        direction: rtl;
+        text-align: right;
+    }
+
+    // Flip search box elements
+    .search-box {
+        input {
+            text-align: right;
+        }
+    }
+
+    // Flip result elements
+    .result {
+        text-align: right;
+    }
+
+    // Flip navigation elements
+    nav {
+        direction: rtl;
+    }
+} 

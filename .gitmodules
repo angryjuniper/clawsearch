@@ -1,0 +1,6 @@
+[submodule "searxng-upstream"]
+	path = searxng-upstream
+	url = https://github.com/angryjuniper/searxng.git
+[submodule "dracula-upstream"]
+	path = dracula-upstream
+	url = https://github.com/angryjuniper/dracula-theme.git

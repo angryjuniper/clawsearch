@@ -1,0 +1,94 @@
+// Dracula Theme Colors
+@dracula-background: #282a36;
+@dracula-current-line: #44475a;
+@dracula-selection: #44475a;
+@dracula-foreground: #f8f8f2;
+@dracula-comment: #6272a4;
+@dracula-cyan: #8be9fd;
+@dracula-green: #50fa7b;
+@dracula-orange: #ffb86c;
+@dracula-pink: #ff79c6;
+@dracula-purple: #bd93f9;
+@dracula-red: #ff5555;
+@dracula-yellow: #f1fa8c;
+
+// Theme Mapping
+@color-base: @dracula-foreground;
+@color-base-dark: darken(@dracula-foreground, 10%);
+@color-base-light: lighten(@dracula-foreground, 10%);
+
+@color-background: @dracula-background;
+@color-background-dark: darken(@dracula-background, 5%);
+@color-background-light: @dracula-current-line;
+
+@color-header-background: @dracula-current-line;
+@color-header-text: @dracula-foreground;
+
+@color-highlight: @dracula-purple;
+@color-highlight-dark: darken(@dracula-purple, 10%);
+@color-highlight-light: lighten(@dracula-purple, 10%);
+
+@color-link: @dracula-cyan;
+@color-link-hover: lighten(@dracula-cyan, 10%);
+@color-link-visited: @dracula-purple;
+
+@color-error: @dracula-red;
+@color-warning: @dracula-orange;
+@color-success: @dracula-green;
+@color-info: @dracula-cyan;
+
+@color-search-background: @dracula-current-line;
+@color-search-border: @dracula-purple;
+@color-search-text: @dracula-foreground;
+
+@color-result-background: @dracula-current-line;
+@color-result-border: @dracula-comment;
+@color-result-title: @dracula-pink;
+@color-result-url: @dracula-green;
+@color-result-content: @dracula-foreground;
+
+@color-btn-background: @dracula-current-line;
+@color-btn-border: @dracula-purple;
+@color-btn-text: @dracula-foreground;
+@color-btn-hover-background: lighten(@dracula-current-line, 10%);
+
+@color-form-background: @dracula-current-line;
+@color-form-border: @dracula-comment;
+@color-form-text: @dracula-foreground;
+
+@color-settings-label: @dracula-pink;
+@color-settings-description: @dracula-comment;
+
+@color-code-background: @dracula-current-line;
+@color-code-color: @dracula-foreground;
+
+// Sizing
+@results-width: 50em;
+@results-offset: 10em;
+@search-width: 40em;
+
+// Mobile
+@mobile-width: 50em;
+
+// Mixins
+.text-size-adjust (@value) {
+    -webkit-text-size-adjust: @value;
+    -moz-text-size-adjust: @value;
+    -ms-text-size-adjust: @value;
+    text-size-adjust: @value;
+}
+
+.disabled () {
+    cursor: not-allowed;
+    opacity: 0.5;
+    background: @color-background-dark;
+}
+
+.result-padding () {
+    padding: 0.5em 1em;
+}
+
+// Font
+@font-family-base: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+@font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+@font-family-sans-serif: @font-family-base; 
