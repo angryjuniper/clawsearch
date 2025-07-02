@@ -25,12 +25,12 @@ fi
 echo "📂 Copying Dracula theme files..."
 
 # Create theme directories if they don't exist
-mkdir -p "$PROJECT_ROOT/searxng-upstream/searx/static/themes/dracula"
-mkdir -p "$PROJECT_ROOT/searxng-upstream/searx/templates/dracula"
+sudo mkdir -p "$PROJECT_ROOT/searxng-upstream/searx/static/themes/dracula"
+sudo mkdir -p "$PROJECT_ROOT/searxng-upstream/searx/templates/dracula"
 
 # Copy theme files
 if [[ -d "$PROJECT_ROOT/customizations/themes/dracula" ]]; then
-    cp -r "$PROJECT_ROOT/customizations/themes/dracula/"* "$PROJECT_ROOT/searxng-upstream/searx/static/themes/dracula/"
+    sudo cp -r "$PROJECT_ROOT/customizations/themes/dracula/"* "$PROJECT_ROOT/searxng-upstream/searx/static/themes/dracula/"
     echo "✅ Theme files copied successfully"
 else
     echo "⚠️  Warning: No theme files found in customizations/themes/dracula"
@@ -38,7 +38,7 @@ fi
 
 # Copy template files
 if [[ -d "$PROJECT_ROOT/customizations/templates/dracula" ]]; then
-    cp -r "$PROJECT_ROOT/customizations/templates/dracula/"* "$PROJECT_ROOT/searxng-upstream/searx/templates/dracula/"
+    sudo cp -r "$PROJECT_ROOT/customizations/templates/dracula/"* "$PROJECT_ROOT/searxng-upstream/searx/templates/dracula/"
     echo "✅ Template files copied successfully"
 else
     echo "⚠️  Warning: No template files found in customizations/templates/dracula"
@@ -46,11 +46,15 @@ fi
 
 # Copy settings file
 if [[ -f "$PROJECT_ROOT/customizations/config/settings.yml" ]]; then
-    cp "$PROJECT_ROOT/customizations/config/settings.yml" "$PROJECT_ROOT/searxng-upstream/searx/"
+    sudo cp "$PROJECT_ROOT/customizations/config/settings.yml" "$PROJECT_ROOT/searxng-upstream/searx/"
     echo "✅ Settings file copied successfully"
 else
     echo "⚠️  Warning: No settings.yml found in customizations/config"
 fi
+
+# Fix file ownership to match container expectations
+echo "🔧 Fixing file permissions..."
+sudo chown -R 977:977 "$PROJECT_ROOT/searxng-upstream/searx/"
 
 echo ""
 echo "✨ Customizations applied successfully!"
