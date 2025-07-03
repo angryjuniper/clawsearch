@@ -5,10 +5,8 @@ cd "$(dirname "$0")/.."   # project root
 
 # obtain latest image tag from GHCR
 get_latest_tag() {
-  curl -s "https://ghcr.io/v2/searxng/searxng/tags/list" | \
-    tr '\",' '\n' | \
-    grep -E '^[0-9]{4}\.[0-9]+\.[0-9]+-[0-9a-f]{7,}$' | \
-    sort -r | head -1
+  docker pull -q ghcr.io/searxng/searxng:latest >/dev/null 2>&1 || true
+  docker inspect --format '{{ index .Config.Labels "org.opencontainers.image.version" }}' ghcr.io/searxng/searxng:latest 2>/dev/null || echo "unknown"
 }
 
 TAG="${SEARX_TAG:-$(get_latest_tag)}"
