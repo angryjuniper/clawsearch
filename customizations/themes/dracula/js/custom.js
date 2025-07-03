@@ -187,7 +187,31 @@ document.addEventListener('DOMContentLoaded', function() {
         updatePlaceholderVisibility();
     }
     
+    // Dynamically adjust autocomplete height so it never overlaps footer
+    function adjustAutocompleteHeight() {
+        const footer = document.querySelector('footer');
+        const searchBox = document.querySelector('.search_box');
+        const autocomplete = searchBox?.querySelector('.autocomplete');
+        if (!footer || !searchBox || !autocomplete) return;
+        const footerHeight = footer.getBoundingClientRect().height;
+        const searchBottom = searchBox.getBoundingClientRect().bottom;
+        const available = window.innerHeight - footerHeight - searchBottom - 12; // 12px buffer
+        if (available > 120) {
+            autocomplete.style.maxHeight = `${available}px`;
+        } else {
+            autocomplete.style.maxHeight = '120px';
+        }
+    }
+    
     // Initialize all functionality
     initEnhancedFooter();
     initPlaceholderVisibility();
+
+    // Re-calculate autocomplete height on relevant events
+    window.addEventListener('resize', adjustAutocompleteHeight);
+    document.addEventListener('input', (e) => {
+        if (e.target && e.target.id === 'q') {
+            adjustAutocompleteHeight();
+        }
+    });
 }); 

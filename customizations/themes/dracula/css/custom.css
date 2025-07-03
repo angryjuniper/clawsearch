@@ -492,7 +492,7 @@ footer {
   min-width: 100% !important; /* ensure minimum width matches search box */
   /* Ensure dropdown stays centered and matches search box width */
   max-width: calc(var(--homepage-container-width) * var(--search-to-logo-ratio) + 4px) !important; /* Match search box width + borders */
-  margin-bottom: 60px !important; /* keep dropdown above footer */
+  /* margin-bottom removed; height is now dynamically controlled via JS */
 }
 
 /* Show autocomplete when it has the 'open' class - smooth entrance */
@@ -840,7 +840,7 @@ footer p {
   background: rgba(12, 13, 22, 0.98) !important;
   border: 2px solid rgba(98, 114, 164, 0.8) !important;
   border-radius: 12px !important;
-  padding: 16px 20px !important;
+  padding: 20px 22px 26px 22px !important; /* extra bottom padding to visually center content */
   font-size: 0.8rem !important;
   line-height: 1.5 !important;
   color: #f8f8f2 !important;
