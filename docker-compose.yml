@@ -1,5 +1,3 @@
-version: '3.7'
-
 services:
   clawsearch-redis:
     container_name: clawsearch-redis
@@ -13,17 +11,22 @@ services:
 
   clawsearch-searxng:
     container_name: clawsearch-searxng
-    image: searxng/searxng:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SEARXNG_VERSION: ${SEARXNG_VERSION}
     networks:
       - clawsearch-network
     depends_on:
       - clawsearch-redis
     volumes:
-      - ./searxng-upstream/searx:/etc/searxng:rw
+      - ./customizations/config/settings.yml:/etc/searxng/settings.yml:rw
     environment:
       - SEARXNG_SECRET_KEY=${SEARXNG_SECRET_KEY}
       - SEARXNG_BASE_URL=${SEARXNG_BASE_URL}
-      - REDIS_URL=redis://:${REDIS_PASSWORD}@clawsearch-redis:6379/0
+      - SEARXNG_REDIS_URL=redis://:${REDIS_PASSWORD}@clawsearch-redis:6379/0
+      - SEARXNG_SETTINGS_PATH=/etc/searxng/settings.yml
     cap_drop:
       - ALL
     cap_add:
@@ -37,9 +40,36 @@ services:
         max-file: "1"
     restart: unless-stopped
 
+  clawsearch-nginx:
+    container_name: clawsearch-nginx
+    image: nginx:alpine
+    networks:
+      - clawsearch-network
+    depends_on:
+      - clawsearch-searxng
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - ./nginx/logs:/var/log/nginx
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETUID
+      - SETGID
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "1"
+    restart: unless-stopped
+
 networks:
   clawsearch-network:
-    driver: bridge
+    external: true
 
 volumes:
   redis-data:

@@ -771,200 +771,165 @@ input[type="text"]::placeholder {
 
 /* ===== FOOTER ===== */
 footer {
-  padding-top: 2px !important;
-  padding-bottom: 2px !important;
+  padding: 2px 10px !important;
   font-size: 0.7rem !important;
   line-height: 1 !important;
   border-top: none !important;
   display: flex !important;
   align-items: center !important;
-  justify-content: center !important;
+  justify-content: center !important; /* center icon container */
   /* Always keep footer visible */
   position: fixed !important;
   bottom: 0 !important;
   left: 0 !important;
   right: 0 !important;
   width: 100% !important;
-  background: rgba(24, 25, 38, 0.98) !important; /* Much darker than page background */
+  background: rgba(24, 25, 38, 0.98) !important;
   backdrop-filter: blur(15px) !important;
   z-index: 100 !important;
-  cursor: pointer !important; /* Indicate it's clickable on mobile */
+  transition: filter 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 footer p {
-  margin: 0 !important;
+  display: none !important; /* universally hide default footer text */
 }
 
-/* Keep footer links functional - just hide | characters and replace with • via JS */
-footer p {
-  font-size: 0.7rem !important;
-}
-
-/* Footer hover blur effect - blur main content and footer text, but keep popup sharp */
-.footer-blur main {
-  filter: blur(2px) !important;
-  transition: filter 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-
-.footer-blur footer {
-  filter: blur(2px) !important;
-  transition: filter 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-
-.footer-blur .footer-popup {
-  filter: none !important;
-}
-
-/* 🔧 FIXED: Consolidated navigation positioning rules to prevent footer hover conflicts */
-/* Keep navigation icons completely locked in viewport position - SINGLE SOURCE OF TRUTH */
+/* Hide the original navigation links in the top corner */
 #links_on_top {
-  position: fixed !important;
-  top: 2.7rem !important;
-  right: 1rem !important;
-  z-index: 9999 !important;
-  transform: translate3d(0, 0, 0) !important; /* Force GPU layer */
-  transition: none !important; /* CRITICAL: No transitions that could be triggered by hover */
-  will-change: transform !important;
-  contain: layout style !important;
-  isolation: isolate !important;
-  pointer-events: auto !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  width: auto !important;
-  height: auto !important;
-  min-width: auto !important;
-  min-height: auto !important;
-  max-width: none !important;
-  max-height: none !important;
-  /* Additional stability properties */
-  backface-visibility: hidden !important;
-  perspective: 1000px !important;
+  display: none !important;
 }
 
-/* 🔧 FIXED: Remove ALL footer hover effects on navigation - prevent any movement */
-body.footer-blur #links_on_top,
-.footer-blur #links_on_top,
-footer:hover ~ #links_on_top,
-footer.footer-blur ~ #links_on_top {
-  /* Override any changes - navigation must NEVER move */
+/* New footer navigation */
+.footer-nav {
+  display: flex !important;
+  align-items: center !important;
+  gap: 20px !important;
+  margin-left: 0 !important;
+}
+
+.footer-nav a, .footer-power {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: var(--color-url-font) !important; /* Purple like links */
+  opacity: 0.8 !important;
+  transition: all 0.2s ease !important;
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+}
+
+.footer-nav a:hover, .footer-power:hover {
+  color: var(--color-url-visited-font) !important; /* Pink on hover */
+  opacity: 1 !important;
+}
+
+.footer-nav a svg, .footer-power svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+/* Power popup styles - enhanced from mobile popup */
+.footer-power-popup {
   position: fixed !important;
-  top: 2.7rem !important;
-  right: 1rem !important;
-  transform: translate3d(0, 0, 0) !important;
-  z-index: 9999 !important;
+  bottom: 40px !important;
+  left: 50% !important;
+  transform: translateX(-50%) translateY(20px) !important;
+  background: rgba(12, 13, 22, 0.98) !important;
+  border: 2px solid rgba(98, 114, 164, 0.8) !important;
+  border-radius: 12px !important;
+  padding: 16px 20px !important;
+  font-size: 0.8rem !important;
+  line-height: 1.5 !important;
+  color: #f8f8f2 !important;
+  backdrop-filter: blur(20px) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
+  z-index: 1000 !important;
+  max-width: 80vw !important;
+  text-align: center !important;
+  display: none !important;
+  opacity: 0 !important;
+  transition: opacity 0.3s ease, transform 0.3s ease !important;
+}
+
+.footer-power-popup.show {
+  display: block !important;
+  opacity: 1 !important;
+  transform: translateX(-50%) translateY(0) !important;
+}
+
+.footer-power-popup a {
+  color: #ff79c6 !important; /* Pink like visited links */
+  text-decoration: none !important;
+}
+
+.footer-power-popup a:hover {
+  color: #ffffff !important;
+  text-decoration: underline !important;
+}
+
+.footer-power-popup p {
+  margin: 0 0 8px 0 !important;
+}
+
+/* Enhanced global blur system when footer popup is shown */
+body.popup-blur #search,
+body.popup-blur .index,
+body.popup-blur .title,
+body.popup-blur #main_results,
+body.popup-blur main,
+body.popup-blur footer .footer-nav,
+body.popup-blur footer p {
+  filter: blur(2px) !important;
+  opacity: 0.7 !important;
+  transition: filter 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Don't blur the popup itself */
+body.popup-blur .footer-power-popup {
   filter: none !important;
-  opacity: 1 !important; /* Ensure visibility */
-  /* No transitions or animations on footer interaction */
-  transition: none !important;
+  opacity: 1 !important;
 }
 
-/* Mobile navigation positioning - maximum stability */
-@media screen and (max-width: 50em) {
-  #links_on_top {
-    top: 1.4rem !important;
-    right: 10px !important;
-    position: fixed !important;
-    z-index: 9999 !important;
-    transform: translate3d(0, 0, 0) !important;
-    contain: layout style !important;
-    backface-visibility: hidden !important;
-    perspective: 1000px !important;
-  }
-  
-  /* 🔧 FIXED: Mobile footer hover rules - prevent movement */
-  body.footer-blur #links_on_top,
-  .footer-blur #links_on_top,
-  footer:hover ~ #links_on_top,
-  footer.footer-blur ~ #links_on_top {
-    top: 1.4rem !important;
-    right: 10px !important;
-    transform: translate3d(0, 0, 0) !important;
-    transition: none !important;
-  }
-}
-
-/* Homepage navigation positioning - maximum stability */
-#main_index #links_on_top {
-  top: 0.5rem !important;
-  right: 0.5rem !important;
-  position: fixed !important;
-  z-index: 9999 !important;
-  transform: translate3d(0, 0, 0) !important;
-  contain: layout style !important;
-  backface-visibility: hidden !important;
-  perspective: 1000px !important;
-}
-
-/* 🔧 FIXED: Homepage footer hover rules - prevent movement */
-#main_index body.footer-blur #links_on_top,
-#main_index .footer-blur #links_on_top,
-#main_index footer:hover ~ #links_on_top,
-#main_index footer.footer-blur ~ #links_on_top {
-  top: 0.5rem !important;
-  right: 0.5rem !important;
-  transform: translate3d(0, 0, 0) !important;
-  transition: none !important;
-}
-
-/* Desktop footer - keep all links visible */
-@media screen and (min-width: 768px) and (orientation: landscape) {
-  footer p {
-    display: block !important;
-  }
-}
-
-/* Mobile/Portrait footer - show simplified text */
+/* Mobile footer - keep icons and hide text */
 @media screen and (max-width: 767px), screen and (orientation: portrait) {
   footer p {
     font-size: 0 !important; /* Hide original text */
+    flex-grow: 0 !important;
+    width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  footer {
+    justify-content: center !important;
+    gap: 20px !important;
+    padding: 6px 10px !important;
   }
   
-  footer p::after {
-    content: "💡 Powered by SearXNG" !important;
-    font-size: 0.7rem !important;
-    display: inline !important;
+  .footer-nav {
+    margin-left: 0 !important;
+    gap: 20px !important;
+  }
+  
+  .footer-power-popup {
+    bottom: 50px !important;
+    max-width: 85vw !important;
+  }
+  
+  .footer-nav a, .footer-power {
+    width: 28px !important;
+    height: 28px !important;
+  }
+  
+  .footer-nav a svg, .footer-power svg {
+    width: 22px !important;
+    height: 22px !important;
   }
 }
 
-/* Footer popup for mobile view only */
-@media screen and (max-width: 767px), screen and (orientation: portrait) {
-  .footer-popup {
-    position: fixed !important;
-    bottom: 30px !important;
-    left: 50% !important;
-    transform: translateX(-50%) translateY(20px) !important;
-    background: rgba(12, 13, 22, 0.98) !important;
-    border: 2px solid rgba(98, 114, 164, 0.8) !important;
-    border-radius: 12px !important;
-    padding: 16px 20px !important;
-    font-size: 0.7rem !important;
-    color: #f8f8f2 !important;
-    backdrop-filter: blur(20px) !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
-    z-index: 1000 !important;
-    max-width: 90vw !important;
-    text-align: center !important;
-    display: none !important;
-    opacity: 0 !important;
-    transition: opacity 0.3s ease, transform 0.3s ease !important;
-  }
-
-  .footer-popup.show {
-    display: block !important;
-    opacity: 1 !important;
-    transform: translateX(-50%) translateY(0) !important;
-  }
-
-  .footer-popup a {
-    color: #ff79c6 !important; /* Same pink as regular footer links */
-    text-decoration: none !important;
-  }
-
-  .footer-popup a:hover {
-    color: #ffffff !important;
-    text-decoration: underline !important;
-  }
-}
+/* ===== FOOTER DONE ===== */
 
 /* ===== IMPROVED RESPONSIVE DESIGN ===== */
 /* Large screens - optimal proportions (landscape) */
@@ -1081,4 +1046,16 @@ footer.footer-blur ~ #links_on_top {
 /* Performance optimization for animations */
 .search_box:focus-within .autocomplete {
   will-change: transform, opacity;
+}
+
+@media screen and (min-width: 768px) {
+  footer p {
+    display: none !important; /* hide footer text on desktop */
+  }
+  footer {
+    justify-content: center !important; /* center icon group */
+  }
+  .footer-nav {
+    margin-left: 0 !important; /* remove left gap so true center */
+  }
 }
