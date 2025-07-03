@@ -94,7 +94,8 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch('/static/version.txt')
             .then(r=>r.text())
             .then(ver=>{
-                powerPopup.innerHTML = `<p>Powered by SearXNG • ${ver} • a privacy-respecting, open metasearch engine</p>
+                const verLink = `<a href="https://github.com/searxng/searxng/pkgs/container/searxng?version=skiptags&tab=tags">${ver}</a>`;
+                powerPopup.innerHTML = `<p>Powered by SearXNG • ${verLink} • a privacy-respecting, open metasearch engine</p>
                   <p><a href="https://github.com/searxng/searxng">Source code</a> • <a href="https://github.com/searxng/searxng/issues">Issue tracker</a> • <a href="https://searx.space">Public instances</a></p>`;
             })
             .catch(()=>{
@@ -105,40 +106,51 @@ document.addEventListener('DOMContentLoaded', function() {
         footer.appendChild(footerNav);
         document.body.appendChild(powerPopup);
         
-        // Power button interaction
+        // ----- Interaction logic -----
         let powerPopupVisible = false;
-        
-        function showPowerPopup() {
+        let hideTimeout;
+
+        const showPowerPopup = () => {
+            if (hideTimeout) clearTimeout(hideTimeout);
             powerPopup.classList.add('show');
             document.body.classList.add('popup-blur');
             powerPopupVisible = true;
-        }
-        
-        function hidePowerPopup() {
+        };
+
+        const hidePowerPopup = () => {
             powerPopup.classList.remove('show');
             document.body.classList.remove('popup-blur');
             powerPopupVisible = false;
-        }
-        
-        // Power button hover and click events
+        };
+
+        // Helper to schedule hide after small delay (allows cursor travel)
+        const scheduleHide = () => {
+            hideTimeout = setTimeout(() => {
+                if (!powerPopup.matches(':hover') && !powerButton.matches(':hover')) {
+                    hidePowerPopup();
+                }
+            }, 150); // 150 ms grace period
+        };
+
+        // Hover interactions
         powerButton.addEventListener('mouseenter', showPowerPopup);
-        powerButton.addEventListener('mouseleave', hidePowerPopup);
-        powerButton.addEventListener('click', function(e) {
+        powerButton.addEventListener('mouseleave', scheduleHide);
+        powerPopup.addEventListener('mouseenter', () => {
+            if (hideTimeout) clearTimeout(hideTimeout);
+        });
+        powerPopup.addEventListener('mouseleave', scheduleHide);
+
+        // Optional: toggle on click as well
+        powerButton.addEventListener('click', (e) => {
             e.preventDefault();
-            if (powerPopupVisible) {
+            powerPopupVisible ? hidePowerPopup() : showPowerPopup();
+        });
+
+        // Click outside closes popup
+        document.addEventListener('click', (evt) => {
+            if (powerPopupVisible && !powerPopup.contains(evt.target) && evt.target !== powerButton) {
                 hidePowerPopup();
-            } else {
-                showPowerPopup();
             }
-        });
-        
-        // Keep popup visible when hovering over it
-        powerPopup.addEventListener('mouseenter', function() {
-            document.body.classList.add('popup-blur');
-        });
-        
-        powerPopup.addEventListener('mouseleave', function() {
-            hidePowerPopup();
         });
         
         // Handle window resize

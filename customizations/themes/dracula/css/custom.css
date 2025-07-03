@@ -492,6 +492,7 @@ footer {
   min-width: 100% !important; /* ensure minimum width matches search box */
   /* Ensure dropdown stays centered and matches search box width */
   max-width: calc(var(--homepage-container-width) * var(--search-to-logo-ratio) + 4px) !important; /* Match search box width + borders */
+  margin-bottom: 60px !important; /* keep dropdown above footer */
 }
 
 /* Show autocomplete when it has the 'open' class - smooth entrance */
@@ -849,14 +850,19 @@ footer p {
   max-width: 80vw !important;
   text-align: center !important;
   display: none !important;
-  opacity: 0 !important;
+  pointer-events: none !important;
   transition: opacity 0.3s ease, transform 0.3s ease !important;
 }
 
 .footer-power-popup.show {
-  display: block !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
   opacity: 1 !important;
   transform: translateX(-50%) translateY(0) !important;
+  pointer-events: auto !important;
 }
 
 .footer-power-popup a {

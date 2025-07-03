@@ -19,7 +19,7 @@ server:
   image_proxy: true
 
 redis:
-  url: redis://redis:6379/0
+  url: false
 
 ui:
   static_use_hash: false
@@ -38,6 +38,15 @@ outgoing:
   pool_connections: 100
   pool_maxsize: 20
   enable_http2: true
+
+doi_resolvers:
+  oadoi.org: 'https://oadoi.org/'
+  doi.org: 'https://doi.org/'
+  sci-hub.se: 'https://sci-hub.se/'
+  sci-hub.st: 'https://sci-hub.st/'
+  sci-hub.ru: 'https://sci-hub.ru/'
+
+default_doi_resolver: 'oadoi.org'
 
 engines:
   - name: startpage
