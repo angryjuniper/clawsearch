@@ -3,21 +3,34 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."   # project root
 
+# obtain latest image tag from GHCR
+get_latest_tag() {
+  curl -s "https://ghcr.io/v2/searxng/searxng/tags/list" | \
+    tr '\",' '\n' | \
+    grep -E '^[0-9]{4}\.[0-9]+\.[0-9]+-[0-9a-f]{7,}$' | \
+    sort -r | head -1
+}
+
+TAG="${SEARX_TAG:-$(get_latest_tag)}"
+echo "▶ target container tag: $TAG" >&2
+
+# extract short SHA from tag (after last '-')
+SHA=${TAG##*-}
+
 # ensure upstream repo is on official tag unless already specified
-TAG="${SEARX_TAG:-2025.6.30-39c50dc}"
 if [[ -e searxng-upstream/.git ]]; then
   echo "▶ switching searxng-upstream to tag $TAG" >&2
   # ensure remote 'upstream' exists and fetch tags
   git -C searxng-upstream remote get-url upstream > /dev/null 2>&1 || \
       git -C searxng-upstream remote add upstream https://github.com/searxng/searxng.git
   git -C searxng-upstream fetch --tags upstream || true
-  git -C searxng-upstream checkout "$TAG" || echo "⚠ tag $TAG not found, staying on current commit"
+  git -C searxng-upstream checkout "$SHA" || echo "⚠ commit $SHA not found, staying on current commit"
 else
   echo "❌ searxng-upstream not initialised" >&2; exit 1
 fi
 
 # derive version string for the build arg
-SEARXNG_VERSION=$(git -C searxng-upstream describe --tags --always)
+SEARXNG_VERSION=$TAG
 export SEARXNG_VERSION
 echo "▶ embedding version: $SEARXNG_VERSION" >&2
 
